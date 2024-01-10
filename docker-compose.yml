@@ -10,6 +10,8 @@ services:
       - db
     links:
       - db
+    networks:
+      - compose-network
 
   db:
     container_name: db
@@ -18,3 +20,9 @@ services:
     ports:
       - 5432:5432
     env_file: db.env
+    networks:
+      - compose-network
+
+networks:
+  compose-network:
+    driver: bridge
