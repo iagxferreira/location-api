@@ -5,7 +5,7 @@ services:
     build: .
     ports:
       - 3000:3000
-    env_file: .env
+    env_file: .env.example
     depends_on:
       - db
     links:
@@ -19,7 +19,7 @@ services:
     image: postgres
     ports:
       - 5432:5432
-    env_file: db.env
+    env_file: db.env.example
     networks:
       - compose-network
 
