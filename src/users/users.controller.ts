@@ -7,41 +7,51 @@ import {
   Param,
   Delete,
   BadRequestException,
+  UseGuards,
+  Request,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDTO } from './dto/create-user.dto';
 import { UpdateUserDTO } from './dto/update-user.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { AuthGuard } from 'src/auth/auth.guard';
 
 @ApiTags('users')
-@Controller('users')
+@Controller('')
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
-  @Post()
-  async create(@Body() createUserDto: CreateUserDTO) {
-    const user = await this.usersService.findByEmail(createUserDto.email);
-    if (user) throw new BadRequestException();
-    return this.usersService.create(createUserDto);
-  }
-
-  @Get()
+  @Get('users')
   findAll() {
     return this.usersService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.usersService.findById(id);
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth()
+  @Get('user/:id')
+  findOne(@Param('id') id: string, @Request() req: { user: { sub: string } }) {
+    if (id !== req.user.sub) throw new UnauthorizedException();
+    return this.usersService.findById(req.user.sub);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDTO) {
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth()
+  @Patch('user/:id')
+  update(
+    @Param('id') id: string,
+    @Body() updateUserDto: UpdateUserDTO,
+    @Request() req: { user: { sub: string } },
+  ) {
+    if (id !== req.user.sub) throw new UnauthorizedException();
     return this.usersService.update(+id, updateUserDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @UseGuards(AuthGuard)
+  @ApiBearerAuth()
+  @Delete('user/:id')
+  remove(@Param('id') id: string, @Request() req: { user: { sub: string } }) {
+    if (id !== req.user.sub) throw new UnauthorizedException();
     return this.usersService.remove(+id);
   }
 }

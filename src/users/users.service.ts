@@ -21,7 +21,7 @@ export class UsersService {
   }
 
   findAll() {
-    return this.repository.find();
+    return this.repository.find({ select: { id: true, email: true } });
   }
 
   async findByEmail(email: string): Promise<User | undefined> {
@@ -31,7 +31,7 @@ export class UsersService {
   async findByEmailWithoutPassword(email: string): Promise<User | undefined> {
     return this.repository.findOne({
       where: { email },
-      select: { id: true, email: true },
+      select: { id: true, email: true, name: true, lastName: true },
     });
   }
 
@@ -40,10 +40,10 @@ export class UsersService {
   }
 
   update(id: number, updateUserDto: UpdateUserDTO) {
-    return `This action updates a #${id} user ${updateUserDto}`;
+    return this.repository.update(id, updateUserDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} user`;
+    return this.repository.softDelete(id);
   }
 }
