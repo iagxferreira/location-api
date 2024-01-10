@@ -5,6 +5,8 @@ import {
   BeforeInsert,
   BeforeUpdate,
   AfterLoad,
+  CreateDateColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 
@@ -27,6 +29,12 @@ export class User {
 
   @Column({ default: true })
   isActive: boolean;
+
+  @CreateDateColumn()
+  created_at: Date;
+
+  @UpdateDateColumn()
+  updated_at: Date;
 
   private tempPassword: string;
 
