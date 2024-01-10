@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
-import { CreateLocationDto } from './dto/create-location.dto';
-import { UpdateLocationDto } from './dto/update-location.dto';
+import { CreateLocationDTO } from './dto/create-location.dto';
+import { UpdateLocationDTO } from './dto/update-location.dto';
 
 @Injectable()
 export class LocationsService {
-  create(createLocationDto: CreateLocationDto) {
+  create(createLocationDto: CreateLocationDTO) {
     return 'This action adds a new location';
   }
 
@@ -16,7 +16,7 @@ export class LocationsService {
     return `This action returns a #${id} location`;
   }
 
-  update(id: number, updateLocationDto: UpdateLocationDto) {
+  update(id: number, updateLocationDto: UpdateLocationDTO) {
     return `This action updates a #${id} location`;
   }
 

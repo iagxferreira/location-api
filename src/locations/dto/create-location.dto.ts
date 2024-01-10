@@ -1,1 +1,1 @@
-export class CreateLocationDto {}
+export class CreateLocationDTO {}
