@@ -4,6 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { UsersModule } from './users/users.module';
 import { LocationsModule } from './locations/locations.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import { LocationsModule } from './locations/locations.module';
     }),
     UsersModule,
     LocationsModule,
+    AuthModule,
   ],
 })
 export class AppModule implements NestModule {
