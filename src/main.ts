@@ -12,6 +12,7 @@ async function bootstrap() {
     .setDescription('Technical challenge')
     .setVersion('1.0')
     .addTag('locations')
+    .addBearerAuth()
     .build();
 
   const document = SwaggerModule.createDocument(app, config);

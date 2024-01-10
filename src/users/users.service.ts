@@ -28,6 +28,13 @@ export class UsersService {
     return this.repository.findOne({ where: { email } });
   }
 
+  async findByEmailWithoutPassword(email: string): Promise<User | undefined> {
+    return this.repository.findOne({
+      where: { email },
+      select: { id: true, email: true },
+    });
+  }
+
   async findById(id: string): Promise<User | undefined> {
     return this.repository.findOne({ where: { id } });
   }
