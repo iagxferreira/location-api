@@ -8,11 +8,11 @@ O que fazer:
 Crie uma API simples para gerenciar lugares (CRUD). Esta API deve permitir:
 - [x] Criar um usuario
 - [x] Autenticar um usuario
-- [ ] Criar um lugar
-- [ ] Editar um lugar
-- [ ] Deletar um lugar
-- [ ] Obter um lugar específico ou todos os locais
-- [ ] Listar lugares e filtrá-los por nome
+- [x] Criar um lugar
+- [x] Editar um lugar
+- [x] Deletar um lugar
+- [x] Obter um lugar específico ou todos os locais
+- [x] Listar lugares e filtrá-los por nome
 Observações:
     • Você deve utilizar o banco PostgreSQL;
 
